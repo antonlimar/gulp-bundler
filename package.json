@@ -1,0 +1,23 @@
+{
+  "name": "gulp-bundler",
+  "version": "1.0.0",
+  "description": "HTML Layout Bundler",
+  "private": true,
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antonlimar/gulp-bundler.git"
+  },
+  "keywords": [
+    "Gulp",
+    "Bundler",
+    "Builder"
+  ],
+  "author": "Anton Limar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/antonlimar/gulp-bundler/issues"
+  },
+  "homepage": "https://github.com/antonlimar/gulp-bundler#readme"
+}
