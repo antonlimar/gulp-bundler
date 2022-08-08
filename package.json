@@ -3,21 +3,30 @@
   "version": "1.0.0",
   "description": "HTML Layout Bundler",
   "private": true,
-  "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp build"
+  },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/antonlimar/gulp-bundler.git"
   },
-  "keywords": [
-    "Gulp",
-    "Bundler",
-    "Builder"
-  ],
+  "keywords": ["Gulp", "Bundler", "Builder"],
   "author": "Anton Limar",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/antonlimar/gulp-bundler/issues"
   },
-  "homepage": "https://github.com/antonlimar/gulp-bundler#readme"
+  "homepage": "https://github.com/antonlimar/gulp-bundler#readme",
+  "devDependencies": {
+    "browser-sync": "^2.27.10",
+    "del": "^7.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-include": "^2.4.1",
+    "gulp-sass": "^5.1.0",
+    "sass": "^1.54.3"
+  }
 }
