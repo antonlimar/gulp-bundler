@@ -1,5 +1,3 @@
-'use strict';
-
 console.log(333);
 
-//=include header/index.js
+//= include header/index.js
