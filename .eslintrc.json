@@ -13,6 +13,7 @@
     "sourceType": "module"
   },
   "plugins": [
+    "html",
     "prettier"
   ],
   "rules": {
