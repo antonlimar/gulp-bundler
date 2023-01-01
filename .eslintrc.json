@@ -15,5 +15,7 @@
   "plugins": [
     "prettier"
   ],
-  "rules": {}
+  "rules": {
+    "no-console": "off"
+  }
 }
