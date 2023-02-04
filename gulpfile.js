@@ -33,9 +33,13 @@ export const scripts = () => {
     .pipe(browserSyncInstance.stream());
 };
 
-export const copyFonts = () => src('./src/fonts/**/*').pipe(dest('./public/fonts/'));
+export const copyFonts = () => {
+  return src('./src/fonts/*').pipe(dest('./public/fonts/')).pipe(browserSyncInstance.stream());
+};
 
-export const copyImages = () => src('./src/images/**/*').pipe(dest('./public/images/'));
+export const copyImages = () => {
+  return src('./src/images/*').pipe(dest('./public/images/')).pipe(browserSyncInstance.stream());
+};
 
 export const copyResources = async () => {
   copyFonts();
@@ -50,7 +54,7 @@ export const pages = () => {
       })
     )
     .pipe(dest('./public/'))
-    .pipe(browserSyncInstance.reload({ stream: true, }));
+    .pipe(browserSyncInstance.reload({ stream: true }));
 };
 
 export const browserSynchronization = () => {
@@ -70,8 +74,10 @@ export const browserSynchronization = () => {
 export const watchDevelopment = () => {
   watch(['./src/pages/*.html', './src/components/**/*.html'], pages).on('change', browserSync.reload);
   watch(['./src/styles/index.scss', './src/components/**/*.scss'], styles).on('change', browserSync.reload);
-  watch(['./src/scripts/script.js', './src/components/**/*.js', ], scripts);
-}
+  watch(['./src/scripts/index.js', './src/components/**/*.js'], scripts);
+  watch(['./src/fonts/*'], copyFonts);
+  watch(['./src/images/*'], copyImages);
+};
 
 const commonTasks = [clean, styles, scripts, copyResources, pages];
 
