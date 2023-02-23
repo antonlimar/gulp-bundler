@@ -14,7 +14,7 @@ const browserSyncInstance = browserSync.create();
 export const clean = async () => deleteSync('./public/', { force: true });
 
 export const styles = () => {
-  return src('./src/styles/index.scss')
+  return src('./src/styles/*')
     .pipe(sassCompiler().on('error', sassCompiler.logError))
     .pipe(autoprefixer({ grid: true }))
     .pipe(groupMediaQueries())
@@ -73,8 +73,8 @@ export const browserSynchronization = () => {
 
 export const watchDevelopment = () => {
   watch(['./src/pages/*.html', './src/components/**/*.html'], pages).on('change', browserSync.reload);
-  watch(['./src/styles/index.scss', './src/components/**/*.scss'], styles).on('change', browserSync.reload);
-  watch(['./src/scripts/index.js', './src/components/**/*.js'], scripts);
+  watch(['./src/styles/*.scss', './src/components/**/*.scss'], styles).on('change', browserSync.reload);
+  watch(['./src/scripts/*.js', './src/components/**/*.js'], scripts);
   watch(['./src/fonts/*'], copyFonts);
   watch(['./src/images/*'], copyImages);
 };
