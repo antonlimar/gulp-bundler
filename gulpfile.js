@@ -18,9 +18,9 @@ const { argv } = yargs(hideBin(process.argv));
 const sassCompiler = gulpSass(sass);
 const browserSyncInstance = browserSync.create();
 
-export const clean = async () => deleteSync('./public/', { force: true });
+const clean = async () => deleteSync('./public/', { force: true });
 
-export const styles = () => {
+const styles = () => {
   return src('./src/styles/*')
     .pipe(gulpIf(argv.sourcemaps, sourcemaps.init()))
     .pipe(sassCompiler().on('error', sassCompiler.logError))
@@ -32,7 +32,7 @@ export const styles = () => {
     .pipe(browserSyncInstance.stream());
 };
 
-export const scripts = () => {
+const scripts = () => {
   return src('./src/scripts/index.js')
     .pipe(gulpIf(argv.sourcemaps, sourcemaps.init()))
     .pipe(
@@ -46,20 +46,20 @@ export const scripts = () => {
     .pipe(browserSyncInstance.stream());
 };
 
-export const copyFonts = () => {
+const copyFonts = () => {
   return src('./src/fonts/*').pipe(dest('./public/fonts/')).pipe(browserSyncInstance.stream());
 };
 
-export const copyImages = () => {
+const copyImages = () => {
   return src('./src/images/*').pipe(dest('./public/images/')).pipe(browserSyncInstance.stream());
 };
 
-export const copyResources = async () => {
+const copyResources = async () => {
   copyFonts();
   copyImages();
 };
 
-export const pages = () => {
+const pages = () => {
   return src('./src/pages/*.html')
     .pipe(
       includeFiles({
@@ -70,7 +70,7 @@ export const pages = () => {
     .pipe(browserSyncInstance.reload({ stream: true }));
 };
 
-export const browserSynchronization = () => {
+const browserSynchronization = () => {
   browserSyncInstance.init({
     server: {
       baseDir: './public/',
@@ -84,7 +84,7 @@ export const browserSynchronization = () => {
   });
 };
 
-export const watchDevelopment = () => {
+const watchDevelopment = () => {
   watch(['./src/pages/*.html', './src/components/**/*.html'], pages);
   watch(['./src/styles/*.scss', './src/components/**/*.scss'], styles);
   watch(['./src/scripts/*.js', './src/components/**/*.js'], scripts);
