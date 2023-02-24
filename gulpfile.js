@@ -4,10 +4,17 @@ import gulpSass from 'gulp-sass';
 import autoprefixer from 'gulp-autoprefixer';
 import groupMediaQueries from 'gulp-group-css-media-queries';
 import includeFiles from 'gulp-include';
+import gulpIf from 'gulp-if';
+import terser from 'gulp-terser';
+import cleanCSS from 'gulp-clean-css';
+import sourcemaps from 'gulp-sourcemaps';
 import browserSync from 'browser-sync';
+import yargs from 'yargs/yargs';
+import { hideBin } from 'yargs/helpers';
 import { deleteSync } from 'del';
 
 const { src, dest, parallel, series, watch } = gulp;
+const { argv } = yargs(hideBin(process.argv));
 const sassCompiler = gulpSass(sass);
 const browserSyncInstance = browserSync.create();
 
@@ -15,20 +22,26 @@ export const clean = async () => deleteSync('./public/', { force: true });
 
 export const styles = () => {
   return src('./src/styles/*')
+    .pipe(gulpIf(argv.sourcemaps, sourcemaps.init()))
     .pipe(sassCompiler().on('error', sassCompiler.logError))
     .pipe(autoprefixer({ grid: true }))
     .pipe(groupMediaQueries())
+    .pipe(gulpIf(argv.production, cleanCSS()))
+    .pipe(gulpIf(argv.sourcemaps, sourcemaps.write('../maps')))
     .pipe(dest('./public/styles/'))
     .pipe(browserSyncInstance.stream());
 };
 
 export const scripts = () => {
   return src('./src/scripts/index.js')
+    .pipe(gulpIf(argv.sourcemaps, sourcemaps.init()))
     .pipe(
       includeFiles({
         includePaths: './src/components/**/',
       })
     )
+    .pipe(gulpIf(argv.production, terser()))
+    .pipe(gulpIf(argv.sourcemaps, sourcemaps.write('../maps')))
     .pipe(dest('./public/scripts/'))
     .pipe(browserSyncInstance.stream());
 };
@@ -72,8 +85,8 @@ export const browserSynchronization = () => {
 };
 
 export const watchDevelopment = () => {
-  watch(['./src/pages/*.html', './src/components/**/*.html'], pages).on('change', browserSync.reload);
-  watch(['./src/styles/*.scss', './src/components/**/*.scss'], styles).on('change', browserSync.reload);
+  watch(['./src/pages/*.html', './src/components/**/*.html'], pages);
+  watch(['./src/styles/*.scss', './src/components/**/*.scss'], styles);
   watch(['./src/scripts/*.js', './src/components/**/*.js'], scripts);
   watch(['./src/fonts/*'], copyFonts);
   watch(['./src/images/*'], copyImages);

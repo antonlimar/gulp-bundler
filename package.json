@@ -6,7 +6,7 @@
   "scripts": {
     "prepare": "husky install",
     "start": "gulp",
-    "build": "gulp build",
+    "build": "gulp build --production",
     "format": "prettier --write 'src/**/*.{cjs,js,jsx,ts,tsx,json,css,scss}'",
     "lint:js": "eslint . --quiet --ext cjs,js,jsx,ts,tsx",
     "lint:css": "stylelint --fix 'src/**/*.{css,scss}'"
@@ -49,15 +49,20 @@
     "glob-parent": "^6.0.2",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
     "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-if": "^3.0.0",
     "gulp-include": "^2.4.1",
     "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-terser": "^2.1.0",
     "husky": "^8.0.3",
     "prettier": "^2.8.4",
     "sass": "^1.58.3",
     "stylelint": "^15.2.0",
     "stylelint-config-prettier-scss": "^0.0.1",
     "stylelint-config-standard-scss": "^7.0.1",
-    "stylelint-scss": "^4.4.0"
+    "stylelint-scss": "^4.4.0",
+    "yargs": "^17.7.1"
   }
 }
