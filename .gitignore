@@ -5,7 +5,9 @@
 /public
 
 # Misc
+/screens
 .DS_Store
+
 # ide
 /.idea
 /.vscode
