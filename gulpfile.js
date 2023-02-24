@@ -33,7 +33,7 @@ const styles = () => {
 };
 
 const scripts = () => {
-  return src('./src/scripts/index.js')
+  return src('./src/scripts/*')
     .pipe(gulpIf(argv.sourcemaps, sourcemaps.init()))
     .pipe(
       includeFiles({
